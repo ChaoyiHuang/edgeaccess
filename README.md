@@ -31,4 +31,4 @@ Fundamental flow:
    
 6. stop one edgeaccess, all edged connection will be shifted to another edgeaccess.
 
-7. there is some issue in ping to edged after edgeaccess is restarted, this issue is left to someone eager to dig.
+7. If one edgeaccess was stopped, just ping the edged from another edgeaccess after it's being automaticly registered to another edgeaccess.
