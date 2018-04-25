@@ -298,6 +298,8 @@ func handleChannel() error {
             err := sendReq2EdgeAccess(&outMsg)
             if err != nil {
                 renewConn()
+                // resume downLink message reading if connectionis renewed
+                go consumerMsg()
             }
         }
     }
@@ -414,8 +416,12 @@ func consumerMsg( ) {
         err = json.Unmarshal([]byte(message), &inMsg)
         if err != nil {
             log.Println("downLinkConn decode err was", err)
+            return
         }
-        processDownLinkMsg( &inMsg )
+        err = processDownLinkMsg( &inMsg )
+        if err != nil {
+            return
+        }
     }
 }
 
