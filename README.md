@@ -3,11 +3,13 @@ Setup sync web-socket connection between edged and edgeaccess.
 
 Fundamental flow:
 1. Start two edgeaccess in two terminals
+
    ./edgeaccess -f ea1.conf
    
    ./edgeaccess -f ea2.conf
 
 2. Start placement in another terminal, placement will do health check for edgeaccesses
+
    ./placement -f p.conf
 
 3. Start edged in another two terminals. Edged will ask for placement which edgeaccess to connect. Edged will establish web-socket connection (sync connection for downlink, uplink respectively) to edgeaccess via placement's decision.
@@ -17,7 +19,9 @@ Fundamental flow:
    ./edged -f ed2.conf
 
 4. you can ping edged via edgeaccess through downLink sync connection
+
    curl "http://127.0.0.1:8899/v1.0/ping2edged?edgenode_id=22&msg=hello"
+
    curl "http://127.0.0.1:8898/v1.0/ping2edged?edgenode_id=333&msg=hello"
 
 5. edged will periodicly generate the statistic of local CPU utilization, and send the result to edgeaccess via upLink sync connection.
